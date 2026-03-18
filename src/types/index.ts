@@ -52,12 +52,12 @@ export interface Contract {
 export interface CouncilMember {
   id?: string;
   name: string;
-  title: string;
-  institution: string;
+  title?: string;
+  institution?: string;
   email: string;
   role: 'chu_tich' | 'phan_bien_1' | 'phan_bien_2' | 'thu_ky' | 'uy_vien';
   hasConflict?: boolean;
-  phone: string;
+  phone?: string;
   affiliation?: string;
 }
 
