@@ -50,7 +50,7 @@ export interface Contract {
 }
 
 export interface CouncilMember {
-  id: string;
+  id?: string;
   name: string;
   title: string;
   institution: string;
@@ -58,7 +58,7 @@ export interface CouncilMember {
   role: 'chu_tich' | 'phan_bien_1' | 'phan_bien_2' | 'thu_ky' | 'uy_vien';
   hasConflict?: boolean;
   phone: string;
-  affiliation: string;
+  affiliation?: string;
 }
 
 export interface Council {
