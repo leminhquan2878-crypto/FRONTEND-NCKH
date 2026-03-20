@@ -20,6 +20,7 @@ export interface SystemStats {
 }
 
 export const reportService = {
+  // GET /api/reports/dashboard
   async getStats(): Promise<SystemStats> {
     await delay();
     const projects = db.projects;
@@ -37,6 +38,7 @@ export const reportService = {
     };
   },
 
+  // GET /api/reports/topics
   async getProjectsByField(): Promise<{ field: string; count: number }[]> {
     await delay(200);
     const map: Record<string, number> = {};
@@ -44,6 +46,7 @@ export const reportService = {
     return Object.entries(map).map(([field, count]) => ({ field, count }));
   },
 
+  // GET /api/reports/progress
   async getProjectsByStatus(): Promise<{ status: Project['status']; count: number }[]> {
     await delay(200);
     const map: Record<string, number> = {};
@@ -51,6 +54,7 @@ export const reportService = {
     return Object.entries(map).map(([status, count]) => ({ status: status as Project['status'], count }));
   },
 
+  // GET /api/reports/export?type={type}&format={format}
   async exportReport(_type: string, _format: 'pdf' | 'excel'): Promise<{ url: string }> {
     await delay(800);
     // In production this would call a backend PDF/Excel generator

@@ -8,16 +8,19 @@ import type { Contract } from '../../types';
 const delay = (ms = 300) => new Promise(res => setTimeout(res, ms));
 
 export const contractService = {
+  // GET /api/research-staff/contracts
   async getAll(): Promise<Contract[]> {
     await delay();
     return [...db.contracts];
   },
 
+  // GET /api/research-staff/contracts/{id}
   async getById(id: string): Promise<Contract | undefined> {
     await delay(150);
     return db.contracts.find(c => c.id === id || c.code === id);
   },
 
+  // POST /api/research-staff/contracts
   async create(data: Omit<Contract, 'id' | 'code' | 'status'>, actorName: string): Promise<Contract> {
     await delay(500);
     const contract: Contract = {
@@ -31,6 +34,7 @@ export const contractService = {
     return contract;
   },
 
+  // POST /api/project-owner/contracts/{id}/confirm
   async sign(id: string, actorName: string): Promise<void> {
     await delay(400);
     const c = db.contracts.find(c => c.id === id);
@@ -41,6 +45,7 @@ export const contractService = {
     }
   },
 
+  // PUT /api/research-staff/contracts/{id}/status
   async updateStatus(id: string, status: Contract['status'], actorName: string): Promise<void> {
     await delay(300);
     const c = db.contracts.find(c => c.id === id);

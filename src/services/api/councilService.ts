@@ -8,16 +8,19 @@ import type { Council, CouncilMember } from '../../types';
 const delay = (ms = 300) => new Promise(res => setTimeout(res, ms));
 
 export const councilService = {
+  // GET /api/research-staff/councils
   async getAll(): Promise<Council[]> {
     await delay();
     return [...db.councils];
   },
 
+  // GET /api/research-staff/councils/{id}
   async getById(id: string): Promise<Council | undefined> {
     await delay(150);
     return db.councils.find(c => c.id === id || c.decisionCode === id);
   },
 
+  // POST /api/research-staff/councils
   async create(projectCode: string, projectTitle: string, members: CouncilMember[], actorName: string): Promise<Council> {
     await delay(500);
     const council: Council = {
@@ -34,6 +37,7 @@ export const councilService = {
     return council;
   },
 
+  // PUT /api/research-staff/councils/{id}
   async updateStatus(id: string, status: Council['status'], actorName: string): Promise<void> {
     await delay(300);
     const c = db.councils.find(c => c.id === id);
@@ -43,6 +47,7 @@ export const councilService = {
     }
   },
 
+  // POST /api/research-staff/councils/{id}/members
   async addMember(councilId: string | null, member: CouncilMember, actorName: string): Promise<void> {
     await delay(200);
     if (councilId) {
@@ -56,7 +61,10 @@ export const councilService = {
     }
   },
 
-  /** Check conflict of interest for a council member */
+  /** 
+   * POST /api/council/{id}/check-conflict
+   * Check conflict of interest for a council member 
+   */
   checkConflict(member: CouncilMember, projectCode: string): boolean {
     // COI rule: any member who has been principal investigator of this project
     const project = db.projects.find(p => p.code === projectCode);

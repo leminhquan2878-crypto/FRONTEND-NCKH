@@ -9,7 +9,10 @@ import type { AuthResponse } from '../../types';
 const delay = (ms = 400) => new Promise(res => setTimeout(res, ms));
 
 export const authService = {
-  /** Validate credentials against fake DB and return auth payload. */
+  /** 
+   * POST /api/auth/login
+   * Validate credentials against fake DB and return auth payload. 
+   */
   async login(email: string, password: string): Promise<AuthResponse> {
     await delay(400);
     // password check is demo-only (all '123456')
