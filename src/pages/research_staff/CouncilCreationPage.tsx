@@ -59,7 +59,7 @@ const CouncilCreationPage: React.FC = () => {
                 <p className="text-xs text-gray-500">Chủ nhiệm: {p.owner} • Thời gian: {p.durationMonths} tháng</p>
               </div>
               <button
-                onClick={() => showToast(`Đã thiết lập Hội đồng cho đề tài ${p.code}`)}
+                onClick={() => document.getElementById('council-details-section')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-6 py-3 bg-primary text-white text-xs font-bold rounded-xl shadow-button hover:bg-primary-dark"
               >
                 Thiết lập Hội đồng
@@ -111,7 +111,7 @@ const CouncilCreationPage: React.FC = () => {
         </div>
 
         {/* Main form */}
-        <div className="col-span-8">
+        <div className="col-span-8" id="council-details-section">
           <div className="bg-white border border-gray-200 rounded-2xl p-8 shadow-card">
             <h3 className="text-lg font-bold text-gray-900 mb-6 border-b border-gray-100 pb-4">Chi tiết thành phần Hội đồng</h3>
             <div className="overflow-hidden border border-gray-100 rounded-xl mb-6">
